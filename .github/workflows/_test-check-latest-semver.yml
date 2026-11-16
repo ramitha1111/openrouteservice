@@ -1,3 +1,8 @@
+# Optimized by ci-cost (https://github.com/mariotavarez/ci-cost)
+# Applied 1 optimization:
+# - [MEDIUM] Add concurrency group to "_test-check-latest-semver.yml"
+# Estimated savings: ~2 min/run
+#
 # Test Check Latest Semver Action
 # ================================
 # Test suite for the check-latest-semver composite action.
@@ -27,6 +32,10 @@ on:
       - '.github/actions/check-latest-semver/**'
       - '.github/workflows/_test-check-latest-semver.yml'
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 
